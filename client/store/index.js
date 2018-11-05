@@ -4,8 +4,13 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import currentCard from './currentCard'
 import user from './user'
+import instructionsFromAdmin from './instructionsFromAdmin'
 
-const reducer = combineReducers({user, currentCard})
+const reducer = combineReducers({
+  user,
+  currentCard,
+  instructionsFromAdmin
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
