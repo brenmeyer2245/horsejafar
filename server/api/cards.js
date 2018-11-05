@@ -12,6 +12,24 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/new', async (req, res, next) => {
+  try {
+    const cards = await Card.findRemainingCards()
+
+    if (cards.length <= 0) throw new Error('No more cards to draw')
+    //draw a random card between 0 and cards.length
+    const cardId = Math.floor(Math.random() * cards.length)
+    console.log('\nCards at index', cards[cardId].id)
+
+    const drawnCard = await Card.findById(cards[cardId].id)
+    console.log('\n\n', drawnCard)
+    // await drawnCard.update({hasBeenUsed: true})
+    res.json(drawnCard)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //find card by id
 router.get('/:cardId', async (req, res, next) => {
   try {
