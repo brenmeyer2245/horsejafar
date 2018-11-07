@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Card, Question, Round, Character} = require('../server/db/models')
 
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -26,7 +26,53 @@ async function seed() {
   ])
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
+  const cards = await Promise.all([
+    Card.create({
+      cardType: 'POINTS',
+      actionType: 'ADD',
+      description: 'Points Card',
+      pointValue: 5
+    }),
+    Card.create({
+      cardType: 'EFFECT',
+      actionType: 'CLEAR',
+      description: 'Effect Card',
+      effectValue: 'One'
+    }),
+    Card.create({
+      cardType: 'ITEM',
+      actionType: 'ADD',
+      description: 'Item Card',
+      itemValue: 'Motor'
+    })
+  ])
+
+  const questions = await Promise.all([
+    Question.create({
+      pointValue: 1,
+      prompt: 'What?',
+      answer: 'This'
+    }),
+    Question.create({
+      pointValue: 2,
+      prompt: 'Who?',
+      answer: 'Him'
+    }),
+    Question.create({
+      pointValue: 3,
+      prompt: 'When?',
+      answer: 'Now'
+    })
+  ])
+
+  const character = await Character.create({
+    name: 'TestCharacter'
+  })
+  const round = await Round.create()
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${cards.length} cards`)
+  console.log(`seeded ${questions.length} questions`)
+  console.log(`seeded ${round.length} round`)
   console.log(`seeded successfully`)
 }
 
