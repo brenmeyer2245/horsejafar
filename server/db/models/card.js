@@ -2,7 +2,14 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Card = db.define('card', {
-  cardType: Sequelize.STRING,
+  cardType: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  actionType: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   description: Sequelize.STRING,
   picture: Sequelize.STRING,
   pointValue: {

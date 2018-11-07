@@ -35,6 +35,7 @@ export const wipeCardToNull = () => dispatch => {
 const initState = {
   id: null,
   cardType: null,
+  actionType: null,
   description: null,
   picture: null,
   pointValue: 0,

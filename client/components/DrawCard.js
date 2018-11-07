@@ -1,5 +1,5 @@
 import React from 'react'
-import {drawNewCard, wipeCardToNull, updateCharacter} from '../store'
+import {drawNewCard, wipeCardToNull, applyCardToCharacter} from '../store'
 import {connect} from 'react-redux'
 
 const DrawCard = props => (
@@ -18,7 +18,9 @@ const DrawCard = props => (
           <p className="card-text">{props.currentCard.description}</p>
           <button
             type="button"
-            onClick={() => props.wipeCard(props.currentCard)}
+            onClick={() =>
+              props.wipeCard(props.currentCharacter.id, props.currentCard)
+            }
           >
             Apply
           </button>
@@ -33,16 +35,17 @@ const DrawCard = props => (
 )
 
 const mapState = state => ({
-  currentCard: state.currentCard
+  currentCard: state.currentCard,
+  currentCharacter: state.currentCharacter
 })
 const mapDispatch = dispatch => ({
   drawACard: () => {
     console.log('Draw at Component')
     dispatch(drawNewCard())
   },
-  wipeCard: info => {
+  wipeCard: (characterId, info) => {
     console.log('Apply', info)
-
+    dispatch(applyCardToCharacter(characterId, info))
     console.log('Wipe')
     dispatch(wipeCardToNull())
   }

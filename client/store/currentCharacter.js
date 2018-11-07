@@ -36,6 +36,20 @@ export const updateCharacterOnServer = (
   dispatch(updatedCharacterToAction(updatedCharacter))
 }
 
+export const applyCardToCharacter = (id, cardInfo) => async dispatch => {
+  let cardApplicationUrl = `/api/characters/${id}`
+  //separate by card type
+  const {cardType} = cardInfo
+
+  if (cardType === 'EFFECT') cardApplicationUrl += '/effects'
+  else if (cardType === 'POINTS') cardApplicationUrl += '/points'
+  else if (cardType === 'ITEM') cardApplicationUrl += '/items'
+
+  const {data: updatedCharacter} = await axios.put(cardApplicationUrl, cardInfo)
+  console.log('Updated Data From Card', updatedCharacter)
+  dispatch(updatedCharacterToAction(updatedCharacter))
+}
+
 const initState = {
   id: null,
   name: null,

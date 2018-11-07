@@ -29,18 +29,21 @@ async function seed() {
   const cards = await Promise.all([
     Card.create({
       cardType: 'POINTS',
+      actionType: 'ADD',
       description: 'Points Card',
       pointValue: 5
     }),
     Card.create({
       cardType: 'EFFECT',
+      actionType: 'CLEAR',
       description: 'Effect Card',
       effectValue: 'One'
     }),
     Card.create({
       cardType: 'ITEM',
+      actionType: 'ADD',
       description: 'Item Card',
-      effectValue: 'Motor'
+      itemValue: 'Motor'
     })
   ])
 

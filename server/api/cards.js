@@ -22,7 +22,6 @@ router.get('/new', async (req, res, next) => {
     console.log('\nCards at index', cards[cardId].id)
 
     const drawnCard = await Card.findById(cards[cardId].id)
-    console.log('\n\n', drawnCard)
     // await drawnCard.update({hasBeenUsed: true})
     res.json(drawnCard)
   } catch (err) {
