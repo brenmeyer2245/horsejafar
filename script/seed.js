@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Card, Question, Round} = require('../server/db/models')
+const {User, Card, Question, Round, Character} = require('../server/db/models')
 
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -62,6 +62,9 @@ async function seed() {
     })
   ])
 
+  const character = await Character.create({
+    name: 'TestCharacter'
+  })
   const round = await Round.create()
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${cards.length} cards`)

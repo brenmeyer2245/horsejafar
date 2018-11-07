@@ -18,11 +18,7 @@ const Card = db.define('card', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   }
-
-  //TODO, make a one to many relationship with user or character
 })
-
-//TODO: make a check that a Card can only have one value between point, effect and item
 
 Card.findRemainingCards = function() {
   return Card.findAll({
